@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://ri6m8ktvqryw"]
+
+[ext_resource type="Script" path="res://main/DOOR.gd" id="1_2gjd1"]
+[ext_resource type="Texture2D" uid="uid://c7kej8v1xd2nn" path="res://sprites/door.png" id="1_g5vnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4oi5"]
+size = Vector2(103, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8fpp"]
+size = Vector2(15, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t2vy"]
+size = Vector2(10, 86)
+
+[node name="DoorUnlocked" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_g5vnv")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_2gjd1")
+
+[node name="mainDoor" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5, -1)
+shape = SubResource("RectangleShape2D_f4oi5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-56.5, 5)
+shape = SubResource("RectangleShape2D_s8fpp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(59, 5)
+shape = SubResource("RectangleShape2D_0t2vy")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="child_entered_tree" from="Area2D/mainDoor" to="." method="_on_main_door_child_entered_tree"]
+[connection signal="child_exiting_tree" from="Area2D/mainDoor" to="." method="_on_main_door_child_exiting_tree"]
+[connection signal="child_order_changed" from="Area2D/mainDoor" to="." method="_on_main_door_child_order_changed"]
+[connection signal="tree_entered" from="Area2D/mainDoor" to="." method="_on_main_door_tree_entered"]
+[connection signal="tree_exited" from="Area2D/mainDoor" to="." method="_on_main_door_tree_exited"]
+[connection signal="tree_exiting" from="Area2D/mainDoor" to="." method="_on_main_door_tree_exiting"]

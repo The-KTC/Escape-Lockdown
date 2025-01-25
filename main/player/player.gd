@@ -15,6 +15,11 @@ func get_input_axis():
 	
 func move(delta):
 	axis = get_input_axis()
+	if Input.is_action_pressed("shift"):
+		#axis*=2
+		MAX_SPEED = 450
+	else:
+		MAX_SPEED = 300
 	if axis==Vector2.ZERO:
 		apply_friction(FRICTION * delta) # apply friction
 	else:
