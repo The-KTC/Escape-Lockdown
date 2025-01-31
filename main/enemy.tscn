@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://btecc5vlhtch4"]
+
+[ext_resource type="Texture2D" uid="uid://c0i854f7mcvf4" path="res://sprites/agent.png" id="1_dwv2h"]
+[ext_resource type="Script" path="res://main/enemy.gd" id="1_y0n48"]
+[ext_resource type="Texture2D" uid="uid://dklf8mwlus1tj" path="res://sprites/flashlight.png" id="2_0r3s2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yjtk"]
+size = Vector2(37, 89)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5umw5"]
+light_mode = 2
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_y0n48")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6yjtk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_5umw5")
+position = Vector2(2, 0)
+scale = Vector2(0.601563, 0.726563)
+texture = ExtResource("1_dwv2h")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-10, 24)
+scale = Vector2(15.8411, 22.5335)
+color = Color(1, 1, 0.345098, 1)
+energy = 1.29
+blend_mode = 2
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("2_0r3s2")
+offset = Vector2(0.04, 6.04)
+texture_scale = 0.01
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+simplify_path = true
