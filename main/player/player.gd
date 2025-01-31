@@ -7,6 +7,9 @@ var life = 10
 @onready var light = $PointLight2D
 
 
+func _ready() -> void:
+	add_to_group("player")
+	
 func _physics_process(delta):
 	move(delta)
 	var mouse_pos = get_global_mouse_position()
@@ -42,5 +45,10 @@ func apply_movement(accel):
 	velocity = velocity.limit_length(MAX_SPEED)
 
 
-
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("right_mouse"):
+		light.enabled = !light.enabled
 	
+func died():
+	$died.visible = true
+	$"..".player_die()

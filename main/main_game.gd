@@ -20,7 +20,8 @@ func update_timer_label():
 
 func player_die():
 	print("OOOH, NOOO..! You're dead LoL")
-	get_tree().reload_current_scene() #neuladen
+	await get_tree().create_timer(2.0).timeout
+	get_tree().reload_current_scene()
 
 func _on_timer_timeout() -> void:
 	player_die()

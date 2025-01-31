@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://btecc5vlhtch4"]
+[gd_scene load_steps=8 format=3 uid="uid://btecc5vlhtch4"]
 
 [ext_resource type="Texture2D" uid="uid://c0i854f7mcvf4" path="res://sprites/agent.png" id="1_dwv2h"]
 [ext_resource type="Script" path="res://main/enemy.gd" id="1_y0n48"]
 [ext_resource type="Texture2D" uid="uid://dklf8mwlus1tj" path="res://sprites/flashlight.png" id="2_0r3s2"]
+[ext_resource type="PackedScene" uid="uid://y6moidu7wl26" path="res://main/healthbar/healthbar.tscn" id="2_qwdth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yjtk"]
 size = Vector2(37, 89)
@@ -10,8 +11,16 @@ size = Vector2(37, 89)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5umw5"]
 light_mode = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_molgu"]
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_y0n48")
+
+[node name="Healthbar" parent="." instance=ExtResource("2_qwdth")]
+offset_left = -23.0
+offset_top = -54.0
+offset_right = 23.0
+offset_bottom = -47.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6yjtk")
@@ -39,3 +48,15 @@ texture_scale = 0.01
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 simplify_path = true
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3.56759, 6.08189)
+shape = SubResource("CircleShape2D_molgu")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="tree_entered" from="Area2D/CollisionShape2D" to="." method="_on_collision_shape_2d_tree_entered"]

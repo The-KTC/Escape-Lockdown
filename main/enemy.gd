@@ -2,9 +2,26 @@ extends CharacterBody2D
 
 @onready var target = $"../Player"
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var healthbar = $Healthbar
+@onready var damage_numbers_origin = $DamageNumbersOrigin
+@onready var hitbox = $CollisionShape2D
+@onready var player = $"../Player"
+
+var health = 10
 var speed = 150
 var active: bool = true
 var rotation_speed = 5
+
+func _ready():
+	#on_dead = die
+	healthbar.init_health(health)
+	connect("body_entered", Callable(self, "_on_body_entered"))
+
+func _set_health(value):
+	#super._set_health(value)
+	if health <=0:
+		self.queue_free()
+	healthbar.health = health
 
 func _physics_process(delta):
 	if active:
@@ -18,3 +35,21 @@ func _physics_process(delta):
 		move_and_slide()
 	else:
 		velocity = Vector2.ZERO
+		
+#func damage(hitbox: Hitbox):
+	#var damage = hitbox.damage
+	#var is_critical = hitbox.crit_chance > randf()
+	#if is_critical:
+		#damage *=2
+	#DamageNumbers.display_number(damage, damage_numbers_origin.global_position, is_critical)
+	#health -= damage
+	#if damage:
+		#hit_flash_anim_player.play("hit_flash")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"): 
+		print("Gegner berührt den Spieler!")
+		player.died()
+
+

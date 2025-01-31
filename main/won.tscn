@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dugllu22ardx8"]
+
+[ext_resource type="Script" path="res://main/won.gd" id="1_cuppp"]
+[ext_resource type="Texture2D" uid="uid://dijqe5su6plff" path="res://sprites/player_good.png" id="1_rhuqu"]
+[ext_resource type="Texture2D" uid="uid://b8domi5apym4o" path="res://sprites/player.png" id="3_v7i6b"]
+
+[node name="Won" type="Node2D"]
+script = ExtResource("1_cuppp")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 331)
+
+[node name="man1" type="Sprite2D" parent="Camera2D"]
+visible = false
+position = Vector2(11, 127)
+scale = Vector2(1.73438, 2.13281)
+texture = ExtResource("1_rhuqu")
+
+[node name="man2" type="Sprite2D" parent="Camera2D"]
+visible = false
+position = Vector2(9, 127)
+scale = Vector2(1.69369, 2.01761)
+texture = ExtResource("3_v7i6b")
+
+[node name="man3" type="Sprite2D" parent="Camera2D"]
+visible = false
+position = Vector2(-577, -331)
+
+[node name="textlabel" type="Label" parent="Camera2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -555.0
+offset_top = -317.0
+offset_right = 552.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
