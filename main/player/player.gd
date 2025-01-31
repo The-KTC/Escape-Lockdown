@@ -50,5 +50,7 @@ func _process(delta: float) -> void:
 		light.enabled = !light.enabled
 	
 func died():
+	$"../Map/CanvasModulate".visible = false
+	$died.modulate = Color(1, 1, 1, 1)
 	$died.visible = true
 	$"..".player_die()
